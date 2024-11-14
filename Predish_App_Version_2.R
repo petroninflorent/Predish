@@ -618,8 +618,9 @@ server <- function(input, output, session) {
 						score=calculate_overlap(piscivoreMinPreySize, piscivoreMaxPreySize, speciesMinSize, speciesMaxSize)
 						result_matrix[allRow, piscivoreRow] <- score
 						#If the checkbox is checked, filter all scores that are higher or equal to the cutoff
+						#only exception is 0, which will always be kept
 						if(input$predationCutoffCheckbox){
-							if (score<predationCutoffThreshold){
+							if (score<predationCutoffThreshold|score==0){
 								listMatrix<-rbind(listMatrix,c(speciesNameAndDev,piscivoreNameAndDev,score))
 							}
 						}
